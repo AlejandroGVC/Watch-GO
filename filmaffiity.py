@@ -1,4 +1,4 @@
-#import pandas as pd
+import pandas as pd
 import requests
 import bs4
 from bs4 import BeautifulSoup
@@ -38,8 +38,7 @@ def main(url):
 			dict_['Cines'].append(nombre_cine)
 		data.append(dict_)
 			
-	return data
-
+	return pd.DataFrame.from_dict(data)
 		
 print(main(url))
 
