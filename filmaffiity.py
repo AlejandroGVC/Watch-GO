@@ -37,9 +37,9 @@ def main(url):
 			nombre_cine = cine.text
 			dict_['Cines'].append(nombre_cine)
 		data.append(dict_)
-			
-	return pd.DataFrame.from_dict(data)
-		
-print(main(url))
+	df = pd.DataFrame.from_dict(data)
+	return df.to_csv('data/cartelera.csv', index = False)
+
+main(url)
 
 
