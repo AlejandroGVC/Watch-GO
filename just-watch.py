@@ -10,6 +10,11 @@ url = 'https://www.justwatch.com/es/proveedor/'
 plataformas = ['amazon-prime-video', 'netflix', 'disney-plus', 'hbo']
 
 def main(url, plataforma):
+    '''
+    Devuelve un dataframe con el nombre del proveedor de
+    servicio streaming, si es una serie o pelicula y 
+    el titulo
+    '''
     driver = webdriver.Safari()
     driver.get(url)
     # Scrolea la pagina hasta el final, y no para hasta que no paran de generarse
@@ -37,18 +42,17 @@ def main(url, plataforma):
         data['Plataforma'].append(plataforma)
         data['Tipo'].append(link.split('/')[-2])
         data['Titulo'].append(link.split('/')[-1].replace('-', ' '))
-    # df =  pd.DataFrame.from_dict(data)
-    # Exportación a csv
-    # path = 'data/' + plataforma + '.csv' 
-    # return df.to_csv(path_or_buf = path, index = False)
     return pd.DataFrame.from_dict(data)
-# Para cada plataforma scroleamos y scrapeamos la pagina
-client = InsecureClient('https://host:port')
+# Union de los dataframes
+df_final = []
 for plataforma in plataformas:
-    path = 'datalake/' + plataforma + '.csv' 
-    url_plataforma = url + plataforma
-    with client_hdfs.write(hdfs_path = path) as writer:
-        main(url_plataforma, plataforma).to_csv(writer)
+    df = main(url + plataforma, plataforma)
+    df_final.append(df)
+df_final = pd.concat(df_final)
+# Creacion del entorno hdfs y escritura del fichero en csv
+client = InsecureClient('http://host:port', user='ann')
+with client_hdfs.write('datalake/justwatch.csv',) as writer:
+    df_final.to_csv(writer)
 
 
   

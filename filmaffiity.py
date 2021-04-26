@@ -7,11 +7,17 @@ from hdfs import InsecureClient
 url = 'https://www.filmaffinity.com/es/cat_new_th_es.html'
 
 def get_html(url):
-	# Devuelve el contenido del html en un objeto beaufitul soup
+	'''
+	Devuelve el contenido del html en un objeto beaufitul soup
+	'''
 	page = requests.get(url)
 	return BeautifulSoup(page.content, 'html.parser')
 
 def main(url):
+	'''
+	Devuelve un dataframe con el titulo de la pelicula
+	y los diferentes cines donde esta disponible
+	'''
 	peliculas = get_html(url).find_all('div', {'class':'movie-title'})
 	ls_links_movie = []
 	ls_link_cine = []
@@ -39,5 +45,5 @@ def main(url):
 	return pd.DataFrame.from_dict(data)
 # Creacion del entorno hdfs y escritura del fichero en csv
 client = InsecureClient('http://host:port', user='ann')
-with client_hdfs.write('datalake/cartelera.csv',) as writer:
+with client_hdfs.write('datalake/filmaffinity.csv',) as writer:
 	main(url).to_csv(writer)
