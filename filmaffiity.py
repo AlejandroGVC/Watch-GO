@@ -42,12 +42,6 @@ def main(url):
 			dict_['Cines'].append(nombre_cine)
 		data.append(dict_)
 	return pd.DataFrame.from_dict(data)
-<<<<<<< HEAD
-# Creacion del entorno hdfs y escritura del fichero en csv
-client = InsecureClient('http://host:port', user='ann')
-with client_hdfs.write('datalake/filmaffinity.csv') as writer:
-	main(url).to_csv(writer)
-=======
-
+#Escritura en csv
 main(url).to_csv('data/filmaffinity.csv')
->>>>>>> c9a03ad41be3f2c42c6654defad62b797c63a3e9
+
