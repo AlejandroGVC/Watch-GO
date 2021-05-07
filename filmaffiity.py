@@ -45,5 +45,5 @@ def main(url):
 	return pd.DataFrame.from_dict(data)
 # Creacion del entorno hdfs y escritura del fichero en csv
 client = InsecureClient('http://host:port', user='ann')
-with client_hdfs.write('datalake/filmaffinity.csv',) as writer:
+with client_hdfs.write('datalake/filmaffinity.csv') as writer:
 	main(url).to_csv(writer)
