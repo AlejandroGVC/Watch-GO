@@ -49,10 +49,15 @@ for plataforma in plataformas:
     df = main(url + plataforma, plataforma)
     df_final.append(df)
 df_final = pd.concat(df_final)
+<<<<<<< HEAD
 # Creacion del entorno hdfs y escritura del fichero en csv
 client = InsecureClient('http://host:port', user='ann')
 with client_hdfs.write('datalake/justwatch.csv') as writer:
     df_final.to_csv(writer)
+=======
+
+df_final.to_csv('data/just-watch.csv')
+>>>>>>> c9a03ad41be3f2c42c6654defad62b797c63a3e9
 
 
   
