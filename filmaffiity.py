@@ -43,5 +43,6 @@ def main(url):
 		data.append(dict_)
 	return pd.DataFrame.from_dict(data)
 #Escritura en csv
-main(url).to_csv('data/filmaffinity.csv')
+main(url).to_csv('data/filmaffinity.csv', index = False)
+
 

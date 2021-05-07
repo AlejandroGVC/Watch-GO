@@ -4,7 +4,6 @@ import pandas as pd
 import time
 import bs4
 from bs4 import BeautifulSoup
-from hdfs import InsecureClient
 
 url = 'https://www.justwatch.com/es/proveedor/'
 plataformas = ['amazon-prime-video', 'netflix', 'disney-plus', 'hbo']
@@ -50,7 +49,7 @@ for plataforma in plataformas:
     df_final.append(df)
 df_final = pd.concat(df_final)
 # Escritura
-df_final.to_csv('data/just-watch.csv')
+df_final.to_csv('data/just-watch.csv', index=False)
 
 
 
