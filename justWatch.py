@@ -57,7 +57,7 @@ def main(url, plataformas):
         df_final.append(df)
     df_final = pd.concat(df_final)
     # Escritura
-    return df_final.to_csv('data/just-watch.csv', index=False)
+    return df_final.to_csv('data/justWatch.csv', index=False)
 
 
 
