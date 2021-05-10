@@ -4,15 +4,16 @@ import pandas as pd
 import time
 import bs4
 from bs4 import BeautifulSoup
-
+# Defino la url de just watch y la lista de plataformas que quiero scrapear
 url = 'https://www.justwatch.com/es/proveedor/'
 plataformas = ['amazon-prime-video', 'netflix', 'disney-plus', 'hbo']
 
-def main(url, plataforma):
+def get_df(url, plataforma):
     '''
     Devuelve un dataframe con el nombre del proveedor de
     servicio streaming, si es una serie o pelicula y 
     el titulo
+    Parámetros: la url de la pagina web y una plataforma de streaming
     '''
     driver = webdriver.Safari()
     driver.get(url)
@@ -42,14 +43,21 @@ def main(url, plataforma):
         data['Tipo'].append(link.split('/')[-2])
         data['Titulo'].append(link.split('/')[-1].replace('-', ' '))
     return pd.DataFrame.from_dict(data)
-# Union de los dataframes
-df_final = []
-for plataforma in plataformas:
-    df = main(url + plataforma, plataforma)
-    df_final.append(df)
-df_final = pd.concat(df_final)
-# Escritura
-df_final.to_csv('data/just-watch.csv', index=False)
+
+def main(url, plataformas):
+    '''
+    Junta los dataframes de las diferentes plataformas 
+    en uno y lo escribe en csv
+    Parámetros: la url de la pagina y el listado de plataformas
+    '''
+    # Union de los dataframes
+    df_final = []
+    for plataforma in plataformas:
+        df = get_df(url + plataforma, plataforma)
+        df_final.append(df)
+    df_final = pd.concat(df_final)
+    # Escritura
+    return df_final.to_csv('data/just-watch.csv', index=False)
 
 
 

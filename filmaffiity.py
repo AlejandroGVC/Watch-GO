@@ -14,7 +14,7 @@ def get_html(url):
 
 def main(url):
 	'''
-	Devuelve un dataframe con el titulo de la pelicula
+	Devuelve un csv con el titulo de la pelicula
 	y los diferentes cines donde esta disponible
 	'''
 	peliculas = get_html(url).find_all('div', {'class':'movie-title'})
@@ -41,8 +41,6 @@ def main(url):
 			nombre_cine = cine.text
 			dict_['Cines'].append(nombre_cine)
 		data.append(dict_)
-	return pd.DataFrame.from_dict(data)
-#Escritura en csv
-main(url).to_csv('data/filmaffinity.csv', index = False)
+	return pd.DataFrame.from_dict(data).to_csv('data/filmaffinity.csv', index = False)
 
 
