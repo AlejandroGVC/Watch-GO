@@ -43,4 +43,5 @@ def main(url):
 		data.append(dict_)
 	return pd.DataFrame.from_dict(data).to_csv('data/filmaffinity.csv', index = False)
 
+main(url)
 

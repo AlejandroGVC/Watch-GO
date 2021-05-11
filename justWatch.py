@@ -59,6 +59,8 @@ def main(url, plataformas):
     # Escritura
     return df_final.to_csv('data/justWatch.csv', index=False)
 
+main(url, plataformas)
+
 
 
   
