@@ -43,6 +43,6 @@ def get_csv(url):
 		data.append(dict_)
 	return pd.DataFrame.from_dict(data).to_csv('data/filmaffinity.csv', index = False)
 
-if __name=='__main__':
+if __name__=='__main__':
     get_csv(url)
 
