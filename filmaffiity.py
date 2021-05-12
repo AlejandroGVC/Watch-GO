@@ -12,7 +12,7 @@ def get_html(url):
 	page = requests.get(url)
 	return BeautifulSoup(page.content, 'html.parser')
 
-def main(url):
+def get_csv(url):
 	'''
 	Devuelve un csv con el titulo de la pelicula
 	y los diferentes cines donde esta disponible
@@ -43,5 +43,6 @@ def main(url):
 		data.append(dict_)
 	return pd.DataFrame.from_dict(data).to_csv('data/filmaffinity.csv', index = False)
 
-main(url)
+if __name=='__main__':
+    get_csv(url)
 

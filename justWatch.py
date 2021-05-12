@@ -44,7 +44,7 @@ def get_df(url, plataforma):
         data['Titulo'].append(link.split('/')[-1].replace('-', ' '))
     return pd.DataFrame.from_dict(data)
 
-def main(url, plataformas):
+def get_csv(url, plataformas):
     '''
     Junta los dataframes de las diferentes plataformas 
     en uno y lo escribe en csv
@@ -59,7 +59,8 @@ def main(url, plataformas):
     # Escritura
     return df_final.to_csv('data/justWatch.csv', index=False)
 
-main(url, plataformas)
+if __name__=='__main__':
+    get_csv(url, plataformas)
 
 
 
